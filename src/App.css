@@ -1,9 +1,28 @@
 #root {
+  display: grid;
+  grid-template-areas:
+    "topbar topbar topbar"
+    "sidebar main main";
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
+
+.topbar {
+  grid-area: topbar;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.main {
+  grid-area: main;
+}
+
 
 .logo {
   height: 6em;
