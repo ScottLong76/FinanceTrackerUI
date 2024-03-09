@@ -1,47 +1,90 @@
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import base64 from 'base-64';
 import React, { useEffect, useState } from 'react';
 
 interface Bank {
-  id: number;
-  name: string;
-  // Add more properties as needed
+    id: number;
+    description: string;
+    // Add more properties as needed
 }
-
 
 const BankTable: React.FC = () => {
     const [banks, setBanks] = useState<Bank[]>([]);
 
     useEffect(() => {
-        // Fetch banks from the server and update the state
-        // Example: fetch('/api/banks')
-        //   .then(response => response.json())
-        //   .then(data => setBanks(data));
+        const username = 'myuser';
+        const password = 'mypassword';
+
+        const requestHeaders: HeadersInit = new Headers();
+        requestHeaders.set('Authorization', `Basic ${base64.encode(`${username}:${password}`)}`);
+        requestHeaders.set('Access-Control-Allow-Origin', '*');
+        requestHeaders.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
+        fetch('http://localhost:8080/bank/getAllBanks', {
+            credentials: 'include', // Include credentials in the request
+            headers: requestHeaders,
+        })
+            .then(response => response.json())
+            .then(data => setBanks(data));
     }, []);
 
     const handleAddBank = () => {
-        // Logic to add a new bank
-        // Example: fetch('/api/banks', { method: 'POST', body: JSON.stringify(newBank) })
-        //   .then(response => response.json())
-        //   .then(data => setBanks([...banks, data]));
+        const newBank: Bank = {
+            id: 0,
+            description: "New Bank",
+            // Add more properties as needed
+        };
+
+        const username = 'myuser';
+        const password = 'mypassword';
+
+        fetch('http://localhost:8080/bank/saveBank', {
+            method: 'POST',
+            body: JSON.stringify(newBank),
+            headers: {
+                Authorization: `Basic ${base64.encode(`${username}:${password}`)}`
+            },
+            mode: 'no-cors' // Set request mode to "no-cors"
+        })
+            .then(response => response.json())
+            .then(data => setBanks([...banks, data]));
     };
 
     const handleUpdateBank = (updatedBank: Bank) => {
-        // Logic to update a bank
-        // Example: fetch(`/api/banks/${updatedBank.id}`, { method: 'PUT', body: JSON.stringify(updatedBank) })
-        //   .then(response => response.json())
-        //   .then(data => {
-        //     const updatedBanks = banks.map(bank => bank.id === data.id ? data : bank);
-        //     setBanks(updatedBanks);
-        //   });
+        const username = 'myuser';
+        const password = 'mypassword';
+
+        fetch(`http://localhost:8080/bank/saveBank`, {
+            method: 'POST',
+            body: JSON.stringify(updatedBank),
+            headers: {
+                Authorization: `Basic ${base64.encode(`${username}:${password}`)}`
+            },
+            mode: 'no-cors' // Set request mode to "no-cors"
+        })
+            .then(response => response.json())
+            .then(data => {
+                const updatedBanks = banks.map(bank => bank.id === data.id ? data : bank);
+                setBanks(updatedBanks);
+            });
     };
 
     const handleDeleteBank = (bankId: number) => {
-        // Logic to delete a bank
-        // Example: fetch(`/api/banks/${bankId}`, { method: 'DELETE' })
-        //   .then(() => {
-        //     const updatedBanks = banks.filter(bank => bank.id !== bankId);
-        //     setBanks(updatedBanks);
-        //   });
+        const username = 'myuser';
+        const password = 'mypassword';
+
+        fetch(`http://localhost:8080/bank/deleteBank`, {
+            method: 'POST',
+            body: JSON.stringify({ id: bankId }),
+            headers: {
+                Authorization: `Basic ${base64.encode(`${username}:${password}`)}`
+            },
+            mode: 'no-cors' // Set request mode to "no-cors"
+        })
+            .then(() => {
+                const updatedBanks = banks.filter(bank => bank.id !== bankId);
+                setBanks(updatedBanks);
+            });
     };
 
     return (
@@ -51,7 +94,7 @@ const BankTable: React.FC = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell>ID</TableCell>
-                            <TableCell>Name</TableCell>
+                            <TableCell>Description</TableCell>
                             {/* Add more table headers as needed */}
                             <TableCell>Actions</TableCell>
                         </TableRow>
@@ -60,7 +103,7 @@ const BankTable: React.FC = () => {
                         {banks.map(bank => (
                             <TableRow key={bank.id}>
                                 <TableCell>{bank.id}</TableCell>
-                                <TableCell>{bank.name}</TableCell>
+                                <TableCell>{bank.description}</TableCell>
                                 {/* Add more table cells for other properties */}
                                 <TableCell>
                                     <Button variant="outlined" color="primary" onClick={() => handleUpdateBank(bank)}>

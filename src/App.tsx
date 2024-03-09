@@ -3,6 +3,7 @@ import './App.css';
 import Dashboard from './scenes/dashboard';
 
 // Import your components here
+import Data from './scenes/data';
 import FTSideBar from './scenes/global/FTSideBar';
 import Topbar from './scenes/global/Topbar';
 
@@ -18,13 +19,7 @@ function App() {
           <Router>
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/page1">
-                Page 1 Content
-              </Route>
-              <Route path="/page2">
-                Page 2 Content
-              </Route>
-              {/* Add more routes as needed */}
+              <Route path="/data" element={<Data/>}/>
             </Routes>
           </Router>
         </div>

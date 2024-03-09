@@ -1,6 +1,7 @@
 
 import { AppBar, Tab, Tabs, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
+import BankTable from './BankTable'; // Import the BankTable component
 
 const TabPanel: React.FC<{ value: number, index: number }> = ({ value, index, children }) => {
     return (
@@ -15,10 +16,10 @@ const TabPanel: React.FC<{ value: number, index: number }> = ({ value, index, ch
 };
 
 const Data: React.FC = () => {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(0); // Declare and initialize the 'value' state variable
 
-    const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-        setValue(newValue);
+    const handleChange = (_event: React.ChangeEvent<{}>, newValue: number) => { // Specify the correct type for the '_event' parameter
+        setValue(newValue); // Define the 'setValue' function to update the 'value' state variable
     };
 
     return (
@@ -37,14 +38,10 @@ const Data: React.FC = () => {
                     
                 </Tabs>
             </AppBar>
+            
+
             <TabPanel value={value} index={0}>
-                {/* Bank table content */}
-
-
-// Add the BankTable component to the TabPanel for Bank table content
-<TabPanel value={value} index={0}>
-  <BankTable />
-</TabPanel>
+                <BankTable />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 {/* Bank Transaction table content */}
