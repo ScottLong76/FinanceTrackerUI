@@ -2,6 +2,7 @@
 import { AppBar, Tab, Tabs, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import BankTable from './BankTable'; // Import the BankTable component
+import BankTransactionTable from './BankTransactionTable'; // Import the BankTransactionTable component
 
 const TabPanel: React.FC<{ value: number, index: number }> = ({ value, index, children }) => {
     return (
@@ -44,7 +45,7 @@ const Data: React.FC = () => {
                 <BankTable />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                {/* Bank Transaction table content */}
+                <BankTransactionTable />
             </TabPanel>
             <TabPanel value={value} index={2}>
                 {/* Bill table content */}

@@ -38,12 +38,15 @@ const BankTable: React.FC = () => {
         const username = 'myuser';
         const password = 'mypassword';
 
+        const requestHeaders: HeadersInit = new Headers();
+        requestHeaders.set('Authorization', `Basic ${base64.encode(`${username}:${password}`)}`);
+        requestHeaders.set('Access-Control-Allow-Origin', '*');
+        requestHeaders.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
         fetch('http://localhost:8080/bank/saveBank', {
             method: 'POST',
             body: JSON.stringify(newBank),
-            headers: {
-                Authorization: `Basic ${base64.encode(`${username}:${password}`)}`
-            },
+            headers: requestHeaders,
             mode: 'no-cors' // Set request mode to "no-cors"
         })
             .then(response => response.json())
@@ -54,12 +57,15 @@ const BankTable: React.FC = () => {
         const username = 'myuser';
         const password = 'mypassword';
 
+        const requestHeaders: HeadersInit = new Headers();
+        requestHeaders.set('Authorization', `Basic ${base64.encode(`${username}:${password}`)}`);
+        requestHeaders.set('Access-Control-Allow-Origin', '*');
+        requestHeaders.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
         fetch(`http://localhost:8080/bank/saveBank`, {
             method: 'POST',
             body: JSON.stringify(updatedBank),
-            headers: {
-                Authorization: `Basic ${base64.encode(`${username}:${password}`)}`
-            },
+            headers: requestHeaders,
             mode: 'no-cors' // Set request mode to "no-cors"
         })
             .then(response => response.json())
@@ -73,12 +79,15 @@ const BankTable: React.FC = () => {
         const username = 'myuser';
         const password = 'mypassword';
 
+        const requestHeaders: HeadersInit = new Headers();
+        requestHeaders.set('Authorization', `Basic ${base64.encode(`${username}:${password}`)}`);
+        requestHeaders.set('Access-Control-Allow-Origin', '*');
+        requestHeaders.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+
         fetch(`http://localhost:8080/bank/deleteBank`, {
             method: 'POST',
             body: JSON.stringify({ id: bankId }),
-            headers: {
-                Authorization: `Basic ${base64.encode(`${username}:${password}`)}`
-            },
+            headers: requestHeaders,
             mode: 'no-cors' // Set request mode to "no-cors"
         })
             .then(() => {
