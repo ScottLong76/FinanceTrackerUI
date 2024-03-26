@@ -1,15 +1,14 @@
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@material-ui/core';
 import base64 from 'base-64';
 import React, { useEffect, useState } from 'react';
+import { Bank } from '../../../types'; // Import the Bank type from the types file
 
-interface Bank {
-    id: number;
-    description: string;
-    // Add more properties as needed
-}
 
 const BankTable: React.FC = () => {
     const [banks, setBanks] = useState<Bank[]>([]);
+    const [page, setPage] = useState(0);
+	const [pageSize, setPageSize] = useState(10);
+	const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
         const username = 'myuser';
@@ -20,13 +19,16 @@ const BankTable: React.FC = () => {
         requestHeaders.set('Access-Control-Allow-Origin', '*');
         requestHeaders.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
-        fetch('http://localhost:8080/bank/getAllBanks', {
+        fetch(`http://localhost:8080/bank/getAllBanks?page=${page}&size=${pageSize}`, {
             credentials: 'include', // Include credentials in the request
             headers: requestHeaders,
         })
             .then(response => response.json())
-            .then(data => setBanks(data));
-    }, []);
+            .then(data => {
+                setBanks(data.content);
+                setTotalPages(data.totalPages);
+            });
+    }, [page, pageSize]);
 
     const handleAddBank = () => {
         const newBank: Bank = {
@@ -96,6 +98,16 @@ const BankTable: React.FC = () => {
             });
     };
 
+    const handlePageChange = (_event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+        console.log(newPage);
+            setPage(newPage);
+     };
+    
+    const handlePageSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            setPageSize(Number(event.target.value));
+            setPage(1);
+    };
+
     return (
         <div>
             <TableContainer component={Paper}>
@@ -126,6 +138,16 @@ const BankTable: React.FC = () => {
                         ))}
                     </TableBody>
                 </Table>
+                <TablePagination
+					rowsPerPageOptions={[10, 25, 50]}
+					component="div"
+					count={totalPages * pageSize}
+					rowsPerPage={pageSize}
+					page={page}
+					onPageChange={handlePageChange}
+					onRowsPerPageChange={handlePageSizeChange}
+
+				/>
             </TableContainer>
             <Button variant="contained" color="primary" onClick={handleAddBank}>
                 Add Bank

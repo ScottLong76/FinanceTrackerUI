@@ -1,10 +1,24 @@
 import React from 'react';
+import { Nav } from 'react-bootstrap';
 
 const Topbar: React.FC = () => {
     return (
         <div className="topbar">
             Welcome to the topbar!
-            {/* Add your menu items here */}
+            <Nav defaultActiveKey="/home" className="topbar-menu">
+                <Nav.Item>
+                    <Nav.Link href="/home">Home</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link href="/data">Data</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link href="/rules">Rules</Nav.Link>
+                </Nav.Item>
+            </Nav>
         </div>
     );
 };

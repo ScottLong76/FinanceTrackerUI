@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .app {
   display: flex;
   flex-direction: column;
@@ -6,8 +10,9 @@
 
 .topbar {
   height: 50px; /* adjust as needed */
-  width: 100%;
+  width: 100vw;
   border-bottom: 1px solid #000; /* adjust color as needed */
+  display: flex;
 }
 
 .main {
@@ -15,11 +20,11 @@
   display: flex;
 }
 
-.sidebar {
-  width: 200px; /* adjust as needed */
-  height: 100%;
-  flex-direction: column; /* add this line to display menu items vertically */
-  border-right: 1px solid #000; /* add this line to create a border on the right side */
+.topbar-menu {
+  flex-direction: row; /* add this line to display menu items horizontally */
+  width: 100%;
+  display: flex; /* add this line to enable flexbox */
+  gap: 10px; /* add this line to add spacing between the Nav Items */
 }
 
 .body {
@@ -27,6 +32,9 @@
   padding: 10px; /* add padding to create separation between the sidebar and the body */
 }
 
-.body {
-  flex-grow: 1;
+.table-container {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
 }

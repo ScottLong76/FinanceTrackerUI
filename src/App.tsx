@@ -4,7 +4,6 @@ import Dashboard from './scenes/dashboard';
 
 // Import your components here
 import Data from './scenes/data';
-import FTSideBar from './scenes/global/FTSideBar';
 import Topbar from './scenes/global/Topbar';
 
 
@@ -14,7 +13,6 @@ function App() {
     <div className="app">
       <Topbar />
       <div className="main">
-        <FTSideBar />
         <div className="body">
           <Router>
             <Routes>

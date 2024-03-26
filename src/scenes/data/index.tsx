@@ -3,6 +3,12 @@ import { AppBar, Tab, Tabs, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import BankTable from './BankTable'; // Import the BankTable component
 import BankTransactionTable from './BankTransactionTable'; // Import the BankTransactionTable component
+import BillTable from './BillTable';
+import DepositCategoryTable from './DepositCategoryTable';
+import DepositTable from './DepositTable';
+import ExpenseCategoryTable from './ExpenseCategoryTable';
+import ExpenseTable from './ExpenseTable';
+import VendorTable from './VendorTable';
 
 const TabPanel: React.FC<{ value: number, index: number }> = ({ value, index, children }) => {
     return (
@@ -32,7 +38,6 @@ const Data: React.FC = () => {
                     <Tab label="Bill" />
                     <Tab label="Expense" />
                     <Tab label="Expense Category" />
-                    <Tab label="Income" />
                     <Tab label="Vendor" />
                     <Tab label="Deposit" />
                     <Tab label="Deposit Category" />
@@ -48,25 +53,22 @@ const Data: React.FC = () => {
                 <BankTransactionTable />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                {/* Bill table content */}
+                <BillTable/>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                {/* Expense table content */}
+                <ExpenseTable />
             </TabPanel>
             <TabPanel value={value} index={4}>
-                {/* Expense Category table content */}
+                <ExpenseCategoryTable />
             </TabPanel>
             <TabPanel value={value} index={5}>
-                {/* Income table content */}
+                <VendorTable />
             </TabPanel>
             <TabPanel value={value} index={6}>
-                {/* Vendor table content */}
+                <DepositTable />
             </TabPanel>
             <TabPanel value={value} index={7}>
-                {/* Deposit table content */}
-            </TabPanel>
-            <TabPanel value={value} index={8}>
-                {/* Deposit Category table content */}
+                <DepositCategoryTable />
             </TabPanel>
             {/* Add more TabPanels for other tables */}
         </div>
