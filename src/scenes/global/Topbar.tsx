@@ -4,7 +4,7 @@ import { Nav } from 'react-bootstrap';
 const Topbar: React.FC = () => {
     return (
         <div className="topbar">
-            Welcome to the topbar!
+            <img src="/logo.webp" alt="Logo" className="topbar-logo" />
             <Nav defaultActiveKey="/home" className="topbar-menu">
                 <Nav.Item>
                     <Nav.Link href="/home">Home</Nav.Link>
