@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
 import Dashboard from './scenes/dashboard';
+import UploadForm from './scenes/upload';
 import theme from './theme';
 
 // Import your components here
@@ -20,7 +21,8 @@ function App() {
             <Router>
               <Routes>
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/data" element={<Data/>}/>
+                <Route path="/manageData" element={<Data/>}/>
+                <Route path="/uploadData" element={<UploadForm/>}/>
               </Routes>
             </Router>
           </div>

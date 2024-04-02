@@ -30,7 +30,7 @@
   flex-direction: row; /* add this line to display menu items horizontally */
   width: 100%;
   display: flex; /* add this line to enable flexbox */
-  gap: 10px; /* add this line to add spacing between the Nav Items */
+  gap: 30px; /* add this line to add spacing between the Nav Items */
 }
 
 .body {

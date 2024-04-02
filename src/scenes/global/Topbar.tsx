@@ -13,10 +13,13 @@ const Topbar: React.FC = () => {
                     <Nav.Link href="/dashboard">Dashboard</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link href="/data">Data</Nav.Link>
+                    <Nav.Link href="/manageData">Manage Data</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link href="/rules">Rules</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link href="/uploadData">Upload Data</Nav.Link>
                 </Nav.Item>
             </Nav>
         </div>
